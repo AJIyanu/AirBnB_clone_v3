@@ -10,4 +10,4 @@ import json
 @app_views.route("/status")
 def ret_status():
     string = json.dumps({"status": "OK"})
-    return "{}".format(string)
+    return string
