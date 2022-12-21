@@ -19,7 +19,7 @@ def teardown_db(exception):
     storage.close()
 
 
-@app_views.errorhandler(404)
+@app.errorhandler(404)
 def invalid_route(e):
     return jsonify(error="Not found")
 
