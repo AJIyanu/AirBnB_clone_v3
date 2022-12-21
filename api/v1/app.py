@@ -19,6 +19,11 @@ def teardown_db(exception):
     storage.close()
 
 
+@app_views.errorhandler(404)
+def invalid_route(e):
+    return jsonify(error="Not found")
+
+
 if __name__ == "__main__":
     HBNB_API_HOST = getenv('HBNB_API_HOST')
     HBNB_API_PORT = getenv('HBNB_API_PORT')

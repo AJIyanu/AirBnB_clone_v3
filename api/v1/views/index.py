@@ -28,8 +28,3 @@ def ret_stats():
             "states": storage.count(State),
             "users": storage.count(User)
             }
-
-
-@app_views.errorhandler(404) 
-def invalid_route(e): 
-    return jsonify({"error": "Not found"})
