@@ -21,10 +21,10 @@ def ret_stats():
     from models.place import Place
     from models.state import State
     from models.city import City
-    return { "amenities": storage.count(Amenity),
-             "cities": storage.count(City),
-             "places": storage.count(Place),
-             "reviews": storage.count(Review),
-             "states": storage.count(State),
-             "users": storage.count(User)
+    return {"amenities": storage.count(Amenity),
+            "cities": storage.count(City),
+            "places": storage.count(Place),
+            "reviews": storage.count(Review),
+            "states": storage.count(State),
+            "users": storage.count(User)
             }
