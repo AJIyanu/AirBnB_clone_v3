@@ -70,5 +70,5 @@ def edit_state(state_id):
         del new_data["created_at"]
     state = allstate[key]
     state.__dict__.update(new_data)
-    storage.save()
+    state.save()
     return jsonify(state.to_dict()), 200
