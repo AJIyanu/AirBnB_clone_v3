@@ -34,7 +34,7 @@ def del_state(state_id):
     allstates = storage.all(State)
     key = "State.{}".format(state_id)
     if key in allstates:
-        storage.delete(allstates[key])
+        allstates[key].delete()
         return {}
     abort(404)
 
@@ -44,7 +44,7 @@ def add_state():
     new_dict = request.get_json()
     if not new_dict:
         return "Not a JSON", 400
-    if "name" not in  new_dict.keys():
+    if "name" not in new_dict.keys():
         return "Missing name", 400
     new_state = State(**new_dict)
     storage.new(new_state)
