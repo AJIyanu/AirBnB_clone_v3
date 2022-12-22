@@ -39,7 +39,7 @@ def del_state(state_id):
     abort(404)
 
 
-@app_views.route("/states", methods=['POST'])
+@app_views.route("/states/", methods=['POST'])
 def add_state():
     new_dict = request.get_json()
     if not new_dict:
