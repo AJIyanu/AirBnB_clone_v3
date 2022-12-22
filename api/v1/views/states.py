@@ -21,7 +21,7 @@ def fetch_states():
 
 @app_views.route("/states/<state_id>", methods=['GET'])
 def fetch_state(state_id):
-    key_id = "State.{}"/format(state_id)
+    key_id = "State.{}".format(state_id)
     allstate = storage.all(State)
     if key_id in allstate.keys():
         state = allstate[key_id]
