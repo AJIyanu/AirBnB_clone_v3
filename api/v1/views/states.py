@@ -9,7 +9,7 @@ from models import storage
 from api.v1.views import app_views
 
 
-@app_views.route("/states"):
+@app_views.route("/states")
 def fetch_states():
     allstate = storage.all(State)
     list_state = []
