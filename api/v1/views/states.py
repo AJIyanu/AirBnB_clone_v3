@@ -9,7 +9,7 @@ from models import storage
 from api.v1.views import app_views
 
 
-@app_views.route("/states/", methods=['GET'])
+@app_views.route("/states", methods=['GET'])
 def fetch_states():
     allstate = storage.all(State)
     list_state = []
@@ -39,7 +39,7 @@ def del_state(state_id):
     abort(404)
 
 
-@app_views.route("/states/", methods=['POST'])
+@app_views.route("/states", methods=['POST'])
 def add_state():
     new_dict = request.get_json()
     if not new_dict:
