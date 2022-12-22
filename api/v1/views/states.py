@@ -19,7 +19,7 @@ def fetch_states():
     return list_state
 
 
-@app_views.route("/states/<state_id>")
+@app_views.route("/states/<state_id>", methods=['GET'])
 def fetch_state(state_id):
     key_id = "State.{}"/format(state_id)
     allstate = storage.all(State)
@@ -29,7 +29,7 @@ def fetch_state(state_id):
     abort(404)
 
 
-@app_views.route("/states/<state_id>", method=['DELETE'])
+@app_views.route("/states/<state_id>", methods=['DELETE'])
 def del_state(state_id):
     allstates = storage.all(State)
     key = "State.{}".format(state_id)
@@ -39,7 +39,7 @@ def del_state(state_id):
     abort(404)
 
 
-@app_views.route("/states", method=['POST'])
+@app_views.route("/states", methods=['POST'])
 def add_state():
     new_dict = request.get_json()
     if not new_dict:
@@ -52,7 +52,7 @@ def add_state():
     return jsonify(new_state.to_dict()), 201
 
 
-@app_views.route("/states/<state_id>", method=['PUT'])
+@app_views.route("/states/<state_id>", methods=['PUT'])
 def edit_state(state_id):
     allstate = storage.all(State)
     key = "State.{}".format(state_id)
