@@ -1,46 +1,29 @@
 #!/usr/bin/python3
-""" Test .get()
+"""Testing file
 """
-from models import storage
-from models.state import State
+import json
+import requests
 
+if __name__ == "__main__":
+    """ Get one state
+    """
+    r = requests.get("http://0.0.0.0:5050/api/v1/states")
+    r_j = r.json()
+    state_id = r_j[0].get('id')
 
-def wrapper_all_type(m_class):
-    res = {}
-    try:
-        res = storage.all(m_class)
-    except:
-        res = {}
-    if res is None or len(res.keys()) == 0:
-        try:
-            res = storage.all(m_class.__name__)
-        except:
-            res = {}
-    return res
+    """ PUT /api/v1/states/<state_id>
+    """
+    r = requests.put("http://0.0.0.0:5050/api/v1/states/{}".format(state_id), data=json.dumps({ 'name': "NewStateName" }), headers={ 'Content-Type': "application/json" })
+    print(r.status_code)
+    r_j = r.json()
+    print(r_j.get('id') == state_id)
+    print(r_j.get('name') == "NewStateName")
 
-state_ids = []
-state_ids_found = []
-for state in wrapper_all_type(State).values():
-    state_ids.append(state.id)
-
-if len(state_ids) == 0:
-    print("empty", end="")
-else:
-    for state_id in state_ids:
-        state = storage.get(State, state_id)
-        if state is not None and state.id == state_id:
-            state_ids_found.append(state_id)
-
-    if len(state_ids_found) != len(state_ids):
-        # try with `<class_name>.<id>`
-        state_ids = wrapper_all_type(State).keys()
-        state_ids_found = []
-        for state_id in state_ids:
-            state = storage.get(State, state_id)
-            if state is not None and state.id == state_id:
-                state_ids_found.append(state_id)
-
-    if len(state_ids_found) == len(state_ids):
-        print("Get success", end="")
-    else:
-        print("Get doesn't retreive all State in storage", end="")
+    """ Verify if the state is updated
+    """
+    r = requests.get("http://0.0.0.0:5050/api/v1/states")
+    r_j = r.json()
+    for state_j in r_j:
+        if state_j.get('id') == state_id:
+            print(state_j.get('name') == "NewStateName")
+        
