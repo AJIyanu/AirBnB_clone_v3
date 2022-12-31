@@ -74,7 +74,6 @@ class FileStorage:
         id = "{}.{}".format(cls.__name__, id)
         obj = self.all()
         if id in obj:
-            print(type(obj[id]))
             return (self.__objects[id])
         else:
             return (None)
