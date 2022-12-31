@@ -80,7 +80,6 @@ class DBStorage:
         id = "{}.{}".format(cls.__name__, id)
         obj = self.all()
         if id in obj:
-            print(type(obj[id]))
             return (obj[id])
         else:
             return (None)
